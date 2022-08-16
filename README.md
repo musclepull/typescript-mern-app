@@ -1,4 +1,4 @@
-# typescript-mern-app
+# Typescript-mern-app
 
 # Authentication REST API with Node.js, TypeScript, Typegoose & Zod
 

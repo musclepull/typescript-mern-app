@@ -2,6 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "author": "Aravind Gopinath",
   "license": "MIT",
   "dependencies": {
     "@typegoose/typegoose": "^9.11.0",
