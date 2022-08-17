@@ -24,9 +24,6 @@ export async function getGitHubUser(code: string) {
 }
 
 async function getAccessToken(code: string) {
-  console.log(`GitHub Client ID: ${config.gitHubClientId}`)
-  console.log(`GitHub Client Secret: ${config.gitHubClientId}`)
-
   const response = await axios.post<AccessTokenResponse>(
     TOKEN_URL,
     {

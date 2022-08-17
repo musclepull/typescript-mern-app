@@ -8,7 +8,7 @@ import {
   RefreshToken,
   RefreshTokenPayload,
   UserDocument,
-} from '@shared'
+} from 'shared/auth'
 
 import {config} from './config'
 
@@ -55,9 +55,9 @@ export function verifyAccessToken(token: string) {
 }
 
 export function buildTokens(user: UserDocument) {
-  const accessPayload: AccessTokenPayload = {userId: user._id}
+  const accessPayload: AccessTokenPayload = {userId: user.id}
   //version is used to revoke the token later
-  const refreshPayload: RefreshTokenPayload = {userId: user._id, version: user.tokenVersion}
+  const refreshPayload: RefreshTokenPayload = {userId: user.id, version: user.tokenVersion}
 
   //take both payloads and convert them into tokens. This process is called signing
   const accessToken = signAccessToken(accessPayload)

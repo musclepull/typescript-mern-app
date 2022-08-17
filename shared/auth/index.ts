@@ -5,6 +5,7 @@ export enum Cookies {
 
 export interface UserDocument {
   _id: string
+  id: string
   name: string
   tokenVersion: number
   gitHubUserId: string
