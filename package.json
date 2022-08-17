@@ -1,10 +1,4 @@
 {
-  "name": "typescript-mern-app",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/musclepull/typescript-mern-app.git",
-  "author": "Aravind <agopinath@gisplanning.com>",
-  "license": "MIT",
   "dependencies": {
     "axios": "^0.27.2",
     "cookie-parser": "^1.4.6",

@@ -12,6 +12,7 @@
     "baseUrl": ".",
     "paths": {
       "@shared" : ["./shared"]
-    }
+    },
+    "moduleResolution": "node"
   }
 }
