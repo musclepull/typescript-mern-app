@@ -1,9 +1,9 @@
-import {useUser} from 'contexts/user.context'
-import {environment} from 'lib/environment'
-import {fetcher} from 'lib/fetcher'
+import {useUser} from 'src/domains/app/contexts/user.context'
+import {environment} from 'src/domains/app/lib/environment'
+import {fetcher} from 'src/domains/app/lib/fetcher'
 import {useEffect} from 'react'
 import {Logout} from '../../components/logout'
-import {UserDocument} from '../../../../../../shared/auth'
+import {UserDocument} from '../../../../shared/auth'
 
 export default function Home() {
   const {user, setUser} = useUser()

@@ -1,5 +1,5 @@
 import {GitHubIcon} from 'icons/github'
-import {environment} from 'lib/environment'
+import {environment} from 'src/domains/app/lib/environment'
 
 const gitHubUrl = `https://github.com/login/oauth/authorize?client_id=${environment.gitHubClientId}&redirect_uri=${environment.gitHubRedirectUri}?scope=user:email`
 

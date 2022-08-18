@@ -1,6 +1,6 @@
-import {useUser} from 'contexts/user.context'
-import {environment} from 'lib/environment'
-import {poster} from 'lib/fetcher'
+import {useUser} from 'src/domains/app/contexts/user.context'
+import {environment} from 'src/domains/app/lib/environment'
+import {poster} from 'src/domains/app/lib/fetcher'
 import {FC} from 'react'
 
 export const Logout: FC = () => {

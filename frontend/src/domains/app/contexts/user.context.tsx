@@ -1,6 +1,6 @@
 import {createContext, FC, ReactNode, useContext, useState} from 'react'
 
-import {UserDocument} from '../../shared/auth'
+import {UserDocument} from '../../../shared/auth'
 
 export interface UserContext {
   user?: UserDocument

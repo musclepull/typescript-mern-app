@@ -8,6 +8,7 @@ export const config = {
 
   gitHubClientId: process.env.GITHUB_CLIENT_ID!,
   gitHubClientSecret: process.env.GITHUB_CLIENT_SECRET!,
+  gitHubRedirectUri: process.env.NEXT_PUBLIC_GITHUB_REDIRECT_URL!,
 
   mongoURL: process.env.MONGODB_URL!,
   mongoUser: process.env.MONGODB_USER!,

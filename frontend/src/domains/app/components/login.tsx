@@ -1,9 +1,9 @@
-import {GitHubIcon} from 'icons/github'
-import {environment} from 'lib/environment'
+import config from '../../../config/custom-env-variables'
+import 'tailwindcss/tailwind.css'
 
-const gitHubUrl = `https://github.com/login/oauth/authorize?client_id=${environment.gitHubClientId}&redirect_uri=${environment.gitHubRedirectUri}?scope=user:email`
+const gitHubUrl = `https://github.com/login/oauth/authorize?client_id=${config.GITHUB_CLIENT_ID}&redirect_uri=${config.GITHUB_REDIRECT_URL}?scope=user:email`
 
-export function Login() {
+export function LoginComponent() {
   return (
     <div className="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
       <div className="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
