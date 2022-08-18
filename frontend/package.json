@@ -3,16 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "copy-localhost-env": "cp -v envs/.env-localhost .env",
+    "copy-dev-env": "cp -v envs/.env-dev .env",
+    "copy-staging-env": "cp -v envs/.env-staging .env",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "watch": "webpack serve --mode development --progress",
+    "start:local": "yarn copy-localhost-env && yarn --production=false && yarn watch",
+    "start:dev": "yarn copy-dev-env && yarn --production=false && yarn watch",
+    "start:staging": "yarn copy-staging-env && yarn --production=false && yarn watch",
+    "start": "yarn start:local",
+    "build": "webpack --mode production --progress"
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
-    "next": "^12.2.5",
+    "connected-react-router": "^6.9.3",
+    "history": "4.10.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-bootstrap": "^2.5.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "react-router": "^6.3.0",
+    "react-router-dom": "5.2.0",
+    "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@types/node": "18.7.6",

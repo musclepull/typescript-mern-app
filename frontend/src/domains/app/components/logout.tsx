@@ -1,7 +1,6 @@
 import {useUser} from 'contexts/user.context'
 import {environment} from 'lib/environment'
 import {poster} from 'lib/fetcher'
-import Router from 'next/router'
 import {FC} from 'react'
 
 export const Logout: FC = () => {
@@ -9,13 +8,13 @@ export const Logout: FC = () => {
 
   const onLogout = async () => {
     await poster(`${environment.apiUrl}/logout`)
-    Router.replace('/')
+    //Router.replace('/')
     location.reload()
   }
 
   const onLogoutAll = async () => {
     await poster(`${environment.apiUrl}/logout-all`)
-    Router.replace('/')
+    //Router.replace('/')
     location.reload()
   }
 
