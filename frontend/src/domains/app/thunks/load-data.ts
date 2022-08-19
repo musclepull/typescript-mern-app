@@ -4,7 +4,7 @@ import {fetcher} from '../lib/fetcher'
 import {setUserInfo, setAppUtilization, setManageUtilizationTable} from '../state'
 
 export const fetchUserInfo: any = () => {
-  return async (dispatch: any, getState: any) => {
+  return async (dispatch: any) => {
     const data = await fetcher<UserDocument>(`${config.API_URL}/home`)
     dispatch(setUserInfo(data))
   }
