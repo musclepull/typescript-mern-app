@@ -1,12 +1,12 @@
 import axios, {AxiosResponse} from 'axios'
-
+import config from '../../../config/custom-env-variables'
 import {environment} from './environment'
 import {getError} from './errors'
 
 export type QueryResponse<T> = [error: string | null, data: T | null]
 
 export const refreshTokens = async () => {
-  await axios.post(`${environment.apiUrl}/refresh`, undefined, {withCredentials: true})
+  await axios.post(`${config.API_URL}/refresh`, undefined, {withCredentials: true})
 }
 
 const handleRequest = async (request: () => Promise<AxiosResponse>): Promise<AxiosResponse> => {
@@ -30,7 +30,7 @@ export const fetcher = async <T>(url: string): Promise<QueryResponse<T>> => {
   try {
     const request = () => axios.get(url, {withCredentials: true})
     const {data} = await handleRequest(request)
-    return [null, data]
+    return data //[error,data] if an array
   } catch (error) {
     return [error, null]
   }

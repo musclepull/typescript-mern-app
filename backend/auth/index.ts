@@ -38,7 +38,7 @@ app.get('/github', async (req, res) => {
   //set Tokens in response Object
   setTokens(res, accessToken, refreshToken)
   //redirect to home page
-  res.redirect(`${config.clientUrl}/home-csr`)
+  res.redirect(`${config.clientUrl}/`)
 })
 
 app.post('/refresh', async (req, res) => {

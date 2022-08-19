@@ -1,3 +1,3 @@
-export const getAppClaims = (state: {app: {claims: any}}) => state.app.claims
+export const getUserInfo = (state: {app: {userInfo: any}}) => state.app.userInfo
 export const getUtilization = (state: {app: {modifiedUtilization: any}}) =>
   state.app.modifiedUtilization

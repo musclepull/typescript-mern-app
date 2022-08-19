@@ -1,18 +1,16 @@
-import axios from 'axios'
-import {environment} from 'src/domains/app/lib/environment'
-import {setAppClaims, setAppUtilization, setManageUtilizationTable} from '../state'
+import {UserDocument} from 'src/shared/auth'
+import config from '../../../config/custom-env-variables'
+import {fetcher} from '../lib/fetcher'
+import {setUserInfo, setAppUtilization, setManageUtilizationTable} from '../state'
 
-export function loadData() {
-  return (dispatch: (arg0: {row: {}; type: string; payload: any}) => any) => {
-    return axios.get(`${environment.apiUrl}/claims`).then(data => dispatch(setAppClaims(data)))
-    // .catch(() => {
-    //     dispatch(setAppClaims(some error?));
-    // });
-    // dispatch(setAppClaims(HARD_CODED_DATA));
+export const fetchUserInfo: any = () => {
+  return async (dispatch: any, getState: any) => {
+    const data = await fetcher<UserDocument>(`${config.API_URL}/home`)
+    dispatch(setUserInfo(data))
   }
 }
 
-export function loadUtilizationData(claim_id: any) {
+/* export function loadUtilizationData(claim_id: any) {
   return (dispatch: (arg0: {type: string; payload: any}) => any) => {
     return axios
       .get(`${environment.apiUrl}/claims/${claim_id}/utilization`)
@@ -42,4 +40,4 @@ export const manageUpdateTables = (
         dispatch(setManageUtilizationTable(row, new_updated_util_obj))
       })
   }
-}
+} */

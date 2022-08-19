@@ -1,9 +1,9 @@
-const SET_APP_CLAIMS = 'app/SET_APP_CLAIMS'
+const SET_USER_INFO = 'app/SET_USER_INFO'
 const MANAGE_UTILIZATION = 'app/MANAGE_UTILIZATION'
 const SAVE_UTILIZATION = 'app/SAVE_APP_UTILIZATION'
 
 const appInitialState = {
-  claims: null,
+  userInfo: null,
   modifiedUtilization: null,
 }
 
@@ -13,8 +13,8 @@ const appInitialState = {
 
 export default function appReducer(state = appInitialState, {payload = {}, type = ''} = {}) {
   switch (type) {
-    case SET_APP_CLAIMS:
-      return {...state, claims: payload}
+    case SET_USER_INFO:
+      return {...state, userInfo: payload}
     case MANAGE_UTILIZATION: {
       var list: {}[] = []
       var completeObj = {}
@@ -70,10 +70,10 @@ export default function appReducer(state = appInitialState, {payload = {}, type 
   }
 }
 
-export function setAppClaims(payload: any) {
+export function setUserInfo(payload: any) {
   return {
     row: {},
-    type: SET_APP_CLAIMS,
+    type: SET_USER_INFO,
     payload,
   }
 }
