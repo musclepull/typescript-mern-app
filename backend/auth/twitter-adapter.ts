@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {config} from './config'
 
-interface GitHubUser {
+interface TwitterUser {
   id: number
   name: string
 }
@@ -15,20 +15,20 @@ interface UserResponse {
   name: string
 }
 
-const TOKEN_URL = 'https://github.com/login/oauth/access_token'
-const USER_URL = 'https://api.github.com/user'
+const TOKEN_URL = 'https://api.twitter.com/2/oauth2/token'
+const USER_URL = 'https://api.twitter.com/2/users'
 
-export async function getGitHubUser(code: string) {
-  const token = await getAccessToken(code)
+export async function getTwitterUser(code: string) {
+  const token = await getTwitterAccessToken(code)
   return getUser(token)
 }
 
-async function getAccessToken(code: string) {
+async function getTwitterAccessToken(code: string) {
   const response = await axios.post<AccessTokenResponse>(
     TOKEN_URL,
     {
-      client_id: config.gitHubClientId,
-      client_secret: config.gitHubClientSecret,
+      client_id: config.twitterClientId,
+      client_secret: config.twitterClientSecret,
       code,
     },
     {
@@ -43,5 +43,5 @@ async function getUser(token: string) {
     headers: {Authorization: `Bearer ${token}`},
   })
 
-  return response.data as GitHubUser
+  return response.data as TwitterUser
 }

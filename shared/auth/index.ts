@@ -11,6 +11,14 @@ export interface UserDocument {
   gitHubUserId: string
 }
 
+export interface twitterUserDocument {
+  _id: string
+  id: string
+  name: string
+  tokenVersion: number
+  twitterUserId: string
+}
+
 export interface AccessTokenPayload {
   userId: string
 }

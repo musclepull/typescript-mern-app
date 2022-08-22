@@ -15,6 +15,20 @@ services:
     command: yarn run ts-node-dev --project backend/tsconfig.json -r tsconfig-paths/register backend/auth/index.ts
     env_file: .env
 
+  frontend-service:
+    image: node:14
+    container_name: frontend
+    volumes:
+      - ./node_modules:/node_modules
+      - ./frontend:/frontend
+      - ./shared:/shared
+      - ./tsconfig.json:/tsconfig.json
+      - ./frontend/package.json:/package.json
+    ports:
+      - '3000:3000'
+    working_dir: /frontend
+    command: yarn start
+
   mongodb:
     image: mongo:5
     container_name: auth_mongodb

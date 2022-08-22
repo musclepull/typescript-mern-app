@@ -10,6 +10,10 @@ export const config = {
   gitHubClientSecret: process.env.GITHUB_CLIENT_SECRET!,
   gitHubRedirectUri: process.env.NEXT_PUBLIC_GITHUB_REDIRECT_URL!,
 
+  twitterClientId: process.env.TWITTER_CLIENT_ID!,
+  twitterClientSecret: process.env.TWITTER_CLIENT_SECRET!,
+  twitterRedirectUri: process.env.TWITTER_GITHUB_REDIRECT_URL!,
+
   mongoURL: process.env.MONGODB_URL!,
   mongoUser: process.env.MONGODB_USER!,
   mongoPassword: process.env.MONGODB_PASSWORD!,

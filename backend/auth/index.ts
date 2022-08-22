@@ -1,18 +1,31 @@
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
+import session from 'express-session'
 import {config} from './config'
 import {databaseClient} from './user-database'
 import {getGitHubUser} from './github-adapter'
+import {getTwitterUser} from './twitter-adapter'
+import {twitterOAuth2} from 'twitter-oauth2'
+import {request} from 'undici'
 
 import {
   getUserByGitHubId,
+  getUserByTwitterId,
   createUser,
+  createTwitterUser,
   setupUserIndexes,
   getUserById,
   increaseTokenVersion,
 } from './user-service'
-import {buildTokens, setTokens, refreshTokens, clearTokens, verifyRefreshToken} from './token-utils'
+import {
+  buildTokens,
+  buildTwitterTokens,
+  setTokens,
+  refreshTokens,
+  clearTokens,
+  verifyRefreshToken,
+} from './token-utils'
 import {Cookies} from 'shared/auth'
 
 import {authMiddleware} from './auth-middleware'
@@ -21,6 +34,15 @@ const app = express()
 
 app.use(cors({credentials: true, origin: config.clientUrl}))
 app.use(cookieParser())
+
+app.use(
+  session({
+    name: 'YOUR-SESSION-NAME',
+    secret: 'YOUR-SECRET',
+    resave: false,
+    saveUninitialized: true,
+  })
+)
 
 app.get('/', (req, res) => res.send('api is healthy')) //Kubernetes health check in
 
@@ -35,6 +57,41 @@ app.get('/github', async (req, res) => {
   if (!user) user = await createUser(gitHubUser.name, gitHubUser.id)
   //hand out refresh and access tokens
   const {accessToken, refreshToken} = buildTokens(user)
+  //set Tokens in response Object
+  setTokens(res, accessToken, refreshToken)
+  //redirect to home page
+  res.redirect(`${config.clientUrl}/`)
+})
+
+app.use(
+  twitterOAuth2({
+    client_id: config.twitterClientId,
+    client_secret: config.twitterClientSecret,
+    redirect_uri: config.twitterRedirectUri,
+    scope: 'tweet.read users.read offline.access',
+  })
+)
+
+app.get('/twitter', async function (req, res) {
+  const tokenSet = req.session.tokenSet
+  console.log(`Starting Twitter...`)
+  console.log('received tokens %j', req.session.tokenSet)
+  console.log('access_token: ' + tokenSet?.access_token)
+  const {body} = await request('https://api.twitter.com/2/users/me', {
+    headers: {
+      Authorization: `Bearer ${tokenSet?.access_token}`,
+    },
+  })
+  const user_obj = await body.json()
+  const username = user_obj.data.username
+  const twitter_id = user_obj.data.id
+  console.log(`Hello ${username}!`)
+  console.log(`Twitter ID: ${twitter_id}`)
+  console.log(`Twitter Name: ${username}`)
+  let twitter_user = await getUserByTwitterId(twitter_id)
+  if (!twitter_user) twitter_user = await createTwitterUser(username, twitter_id)
+  //hand out refresh and access tokens
+  const {accessToken, refreshToken} = buildTwitterTokens(twitter_user)
   //set Tokens in response Object
   setTokens(res, accessToken, refreshToken)
   //redirect to home page

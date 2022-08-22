@@ -9,6 +9,7 @@ export interface UserDocument {
   name: string
   tokenVersion: number
   gitHubUserId: string
+  twitterUserId: string
 }
 
 export interface AccessTokenPayload {

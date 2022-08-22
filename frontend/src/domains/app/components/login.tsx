@@ -2,6 +2,7 @@ import config from '../../../config/custom-env-variables'
 import 'tailwindcss/tailwind.css'
 
 const gitHubUrl = `https://github.com/login/oauth/authorize?client_id=${config.GITHUB_CLIENT_ID}&redirect_uri=${config.GITHUB_REDIRECT_URL}?scope=user:email`
+const twitterUrl = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.TWITTER_CLIENT_ID}&redirect_uri=${config.TWITTER_REDIRECT_URL}&scope=tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain`
 
 export function LoginComponent() {
   return (
@@ -108,7 +109,7 @@ export function LoginComponent() {
                   </span>
                 </a>
                 <a
-                  href="#"
+                  href={twitterUrl}
                   className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-blue-500 rounded-md group hover:bg-blue-500 focus:outline-none"
                 >
                   <span>
